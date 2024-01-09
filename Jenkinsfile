@@ -26,7 +26,7 @@ pipeline {
                 git branch: 'main', credentialsId: 'credintials-ssh2', url: 'https://github.com/TirTir/Chopper2.git'
                 sh '''
                     rm -rf templates/deployment.yaml
-                    sed "s/VERSIONTAG/"${VERSION}"/g" "templates/deployment-template.yaml" > templates/deployment.yaml
+                    sed "s/VERSIONTAG/"${DB_SERVER_VERSION}"/g" "templates/deployment-template.yaml" > templates/deployment.yaml
                     ls -al
                     git add --all
                     git commit -m 'update image tag'
