@@ -34,7 +34,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: 035574589515.dkr.ecr.us-east-2.amazonaws.com/yudeng_jenkins:1
+          image: 035574589515.dkr.ecr.us-east-2.amazonaws.com/yudeng_jenkins:dbserver-11
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: https
