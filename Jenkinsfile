@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/shimmins/docker-spring-boot-deploy.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/TirTir/Chopper2.git']]])
             }
         }
 
@@ -20,10 +20,10 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Argo Git Clone') {
             steps {
-                git branch: 'main', credentialsId: 'credintials-ssh', url: 'https://github.com/shimmins/docker-spring-boot-deploy.git'
+                git branch: 'main', credentialsId: 'credintials-ssh2', url: 'https://github.com/TirTir/Chopper2.git'
                 sh '''
                     rm -rf templates/deployment.yaml
                     sed "s/VERSIONTAG/"${VERSION}"/g" "templates/deployment-template.yaml" > templates/deployment.yaml
@@ -31,13 +31,13 @@ pipeline {
                     git add --all
                     git commit -m 'update image tag'
                     eval $(ssh-agent -s)
-                    ssh-add ~/.ssh/gittest
-                    git push --set-upstream git@github.com:shimmins/docker-spring-boot-deploy.git main
+                    ssh-add ~/.ssh/id_rsa
+                    git push --set-upstream git@github.com:TirTir/Chopper2.git main
                     git push
                     ssh-agent -k
                 '''
             }
         }
-        
+
     }
 }
