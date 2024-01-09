@@ -31,7 +31,7 @@ pipeline {
                     git add --all
                     git commit -m 'update image tag'
                     eval $(ssh-agent -s)
-                    ssh-add ~/.ssh/id_rsa
+                    ssh-add ~/.ssh/argo
                     git push --set-upstream git@github.com:TirTir/Chopper2.git main
                     git push
                     ssh-agent -k
