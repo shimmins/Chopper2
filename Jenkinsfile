@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/TirTir/Chopper2.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/shimmins/Chopper2.git']]])
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Argo Git Clone') {
             steps {
-                git branch: 'main', credentialsId: 'credintials-ssh2', url: 'https://github.com/TirTir/Chopper2.git'
+                git branch: 'main', credentialsId: 'credintials-ssh2', url: 'https://github.com/shimmins/Chopper2.git'
                 sh '''
                     rm -rf templates/deployment.yaml
                     sed "s/VERSIONTAG/"${DB_SERVER_VERSION}"/g" "templates/deployment-template.yaml" > templates/deployment.yaml
@@ -32,7 +32,7 @@ pipeline {
                     git commit -m 'update image tag'
                     eval $(ssh-agent -s)
                     ssh-add ~/.ssh/argo
-                    git push --set-upstream git@github.com:TirTir/Chopper2.git main
+                    git push --set-upstream git@github.com:shimmins/Chopper2.git main
                     git push
                     ssh-agent -k
                 '''
