@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: 035574589515.dkr.ecr.us-east-2.amazonaws.com/yudeng_jenkins
+  repository: 852524605641.dkr.ecr.us-east-2.amazonaws.com/jenkins_project
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
